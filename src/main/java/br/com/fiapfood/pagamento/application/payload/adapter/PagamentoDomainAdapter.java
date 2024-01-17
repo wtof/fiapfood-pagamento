@@ -25,6 +25,7 @@ public class PagamentoDomainAdapter {
                 .id(entity.getId())
                 .status(StatusPagamento.valueOf(entity.getStatus().name()))
                 .idPagamentoIntegrador(entity.getIdPagamentoIntegrador())
+                .idPedido(entity.getIdPedido())
                 .dataPagamento(entity.getDataPagamento())
                 .build();
     }

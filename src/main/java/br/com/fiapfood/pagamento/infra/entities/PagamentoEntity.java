@@ -2,25 +2,24 @@ package br.com.fiapfood.pagamento.infra.entities;
 
 
 import br.com.fiapfood.pagamento.domain.enuns.StatusPagamento;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
 @Data
 @Builder
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Pagamento")
+@Document("Pagamento")
 public class PagamentoEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    public String id;
 
     public Long idPedido;
 

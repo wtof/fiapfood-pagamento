@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Pagamento {
 
-    private Long id;
+    private String id;
 
     private Long idPedido;
 
@@ -39,7 +39,7 @@ public class Pagamento {
         }
 
         if (this.getIdPedido() == null) {
-            throw new DominioException("O id do pedido vinculado ao pagamento está nulo");
+            throw new DominioException("O pedido vinculado ao pagamento está nulo");
         }
     }
 }

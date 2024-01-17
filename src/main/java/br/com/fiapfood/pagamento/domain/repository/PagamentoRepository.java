@@ -9,7 +9,7 @@ public interface PagamentoRepository {
 
     public Pagamento salvarPagamento(Pagamento pagamento);
 
-    public Pagamento buscarPagamentoPorId(Long id);
+    public Pagamento buscarPagamentoPorId(String id);
 
     public List<Pagamento> buscarPedidoPorStatus(StatusPagamento status);
 

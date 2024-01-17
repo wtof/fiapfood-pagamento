@@ -25,7 +25,7 @@ public class PagamentoResponseAdapter {
                 .idPagamento(pagamento.getId())
                 .status(pagamento.getStatus())
                 .idPagamentoIntegrador(pagamento.getIdPagamentoIntegrador())
-                .idPedido(pagamento.getPedido().getId())
+                .idPedido(pagamento.getIdPedido())
                 .dataPagamento(pagamento.getDataPagamento())
                 .build();
     }

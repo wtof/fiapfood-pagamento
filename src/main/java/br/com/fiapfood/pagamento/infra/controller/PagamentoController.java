@@ -22,7 +22,7 @@ public class PagamentoController {
     }
 
     @PostMapping("/pagamento")
-    @Operation(summary = "Operação responsável por receber uma  notificação de pagamento do webhook do Mercado Pago")
+    @Operation(summary = "Operação responsável por simular o recebimento de uma  notificação de pagamento do webhook do Mercado Pago. Action (payment.created)")
     public ResponseEntity<PagamentoResponse> recebeNotificacaoPagamento(@RequestBody EventoPagamentoDTO eventoPagamentoRequest) {
         return ResponseEntity.ok(pagamentoService.recebeNotificacaoEventoPagamento(eventoPagamentoRequest));
     }

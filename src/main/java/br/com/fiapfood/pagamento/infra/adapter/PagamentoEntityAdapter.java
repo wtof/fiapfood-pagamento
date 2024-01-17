@@ -27,7 +27,7 @@ public class PagamentoEntityAdapter {
                 .status(StatusPagamento.valueOf(pagamento.getStatus().name()))
                 .idPagamentoIntegrador(pagamento.getIdPagamentoIntegrador())
                 .dataPagamento(pagamento.getDataPagamento())
-                .idPedido(pagamento.getId())
+                .idPedido(pagamento.getIdPedido())
                 .build();
     }
 

@@ -2,7 +2,9 @@ package br.com.fiapfood.pagamento.infra.payment;
 
 import br.com.fiapfood.pagamento.application.interfaces.IntegradorPedido;
 import br.com.fiapfood.pagamento.application.payload.dto.PedidoDTO;
+import org.springframework.stereotype.Service;
 
+@Service
 public class IntegradorPedidoImpl implements IntegradorPedido
 {
     private final PedidoClientFeing pedidoClientFeing;
