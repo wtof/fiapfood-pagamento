@@ -1,4 +1,4 @@
-package br.com.fiapfood.pagamento.entities;
+package br.com.fiapfood.pagamento.domain.entities;
 
 import br.com.fiapfood.pagamento.domain.entities.Pagamento;
 import br.com.fiapfood.pagamento.domain.enuns.StatusPagamento;

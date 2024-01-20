@@ -17,7 +17,7 @@ public class PagamentoController {
 
     private final PagamentoService pagamentoService;
 
-    public PagamentoController(PagamentoServiceImpl pagamentoService) {
+    public PagamentoController(PagamentoService pagamentoService) {
         this.pagamentoService = pagamentoService;
     }
 
