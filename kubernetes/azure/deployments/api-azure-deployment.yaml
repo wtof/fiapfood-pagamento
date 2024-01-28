@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fiapfood-pagamento-api
+  labels:
+    app: fiapfood-pagamento-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: fiapfood-pagamento-api
+  template:
+    metadata:
+      name: fiapfood-pagamento-api
+      labels:
+        app: fiapfood-pagamento-api
+    spec:
+      containers:
+      - name: fiapfood-pagamento-container
+        image: wtof/fiapfood-pagamento:latest
+        ports:
+        - containerPort: 8080
+        envFrom:
+        - secretRef:
+            name: db-pagamento-secret
+        - configMapRef:
+            name: api-pagamento-configmap
+
+        livenessProbe:
+          httpGet:
+            path: /swagger-ui/index.html
+            port: 8080
+          periodSeconds: 60
+          failureThreshold: 5
+          initialDelaySeconds: 180
+        readinessProbe:
+          httpGet:
+            path: /swagger-ui/index.html
+            port: 8080
+          periodSeconds: 60
+          failureThreshold: 5
+          initialDelaySeconds: 180
+        resources:
+          requests:
+            cpu: 200m
+            memory: 228Mi
+          limits:
+            cpu: 400m
+            memory: 524Mi

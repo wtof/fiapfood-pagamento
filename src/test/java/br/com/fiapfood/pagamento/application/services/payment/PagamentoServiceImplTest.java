@@ -3,6 +3,7 @@ package br.com.fiapfood.pagamento.application.services.payment;
 import br.com.fiapfood.pagamento.application.exceptions.ApplicationException;
 import br.com.fiapfood.pagamento.application.interfaces.IntegradorPagamento;
 import br.com.fiapfood.pagamento.application.interfaces.IntegradorPedido;
+import br.com.fiapfood.pagamento.application.interfaces.IntegradorProducao;
 import br.com.fiapfood.pagamento.application.payload.dto.EventoPagamentoDTO;
 import br.com.fiapfood.pagamento.application.payload.dto.MedataDTO;
 import br.com.fiapfood.pagamento.application.payload.dto.PagamentoDTO;
@@ -29,12 +30,15 @@ class PagamentoServiceImplTest {
     @Mock
     private IntegradorPedido integradorPedido;
 
+    @Mock
+    private IntegradorProducao integradorProducao;
+
     private PagamentoServiceImpl pagamentoService;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        pagamentoService = new PagamentoServiceImpl(integradorPagamento, pagamentoUseCase, integradorPedido);
+        pagamentoService = new PagamentoServiceImpl(integradorPagamento, pagamentoUseCase, integradorPedido, integradorProducao);
     }
 
     @Test

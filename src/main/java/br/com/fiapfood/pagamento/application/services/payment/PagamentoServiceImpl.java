@@ -3,6 +3,7 @@ package br.com.fiapfood.pagamento.application.services.payment;
 import br.com.fiapfood.pagamento.application.exceptions.ApplicationException;
 import br.com.fiapfood.pagamento.application.interfaces.IntegradorPagamento;
 import br.com.fiapfood.pagamento.application.interfaces.IntegradorPedido;
+import br.com.fiapfood.pagamento.application.interfaces.IntegradorProducao;
 import br.com.fiapfood.pagamento.application.payload.dto.PedidoDTO;
 import br.com.fiapfood.pagamento.application.interfaces.PagamentoService;
 import br.com.fiapfood.pagamento.application.payload.adapter.PagamentoResponseAdapter;
@@ -13,7 +14,11 @@ import br.com.fiapfood.pagamento.application.payload.response.PagamentoResponse;
 import br.com.fiapfood.pagamento.domain.entities.Pagamento;
 import br.com.fiapfood.pagamento.domain.enuns.StatusPagamento;
 import br.com.fiapfood.pagamento.domain.usecases.PagamentoUseCaseImpl;
+import br.com.fiapfood.pagamento.infra.entities.MockMessage;
+import br.com.fiapfood.pagamento.infra.entities.MockQueue;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 @Service
 public class PagamentoServiceImpl implements PagamentoService {
@@ -21,11 +26,13 @@ public class PagamentoServiceImpl implements PagamentoService {
     private final IntegradorPagamento integradorPagamento;
     private final PagamentoUseCaseImpl pagamentoUseCase;
     private final IntegradorPedido integradorPedido;
+    private final IntegradorProducao integradorProducao;
 
-    public PagamentoServiceImpl(IntegradorPagamento integradorPagamento, PagamentoUseCaseImpl pagamentoUseCase, IntegradorPedido integradorPedido) {
+    public PagamentoServiceImpl(IntegradorPagamento integradorPagamento, PagamentoUseCaseImpl pagamentoUseCase, IntegradorPedido integradorPedido, IntegradorProducao integradorProducao) {
         this.integradorPagamento = integradorPagamento;
         this.pagamentoUseCase = pagamentoUseCase;
         this.integradorPedido = integradorPedido;
+        this.integradorProducao = integradorProducao;
     }
 
     public PagamentoResponse recebeNotificacaoEventoPagamento(EventoPagamentoDTO eventoPagamentoDTO) {
@@ -64,6 +71,13 @@ public class PagamentoServiceImpl implements PagamentoService {
 
         atualizarStatusPedido(pedidoDTO);
 
+        MockQueue mockQueue = new MockQueue();
+        mockQueue.setNome("PRODUCAO");
+        enviarPedidoProducao(MockMessage.builder()
+                        .fila(mockQueue)
+                        .dataEnvio(LocalDateTime.now())
+                        .build());
+
         return  pagamento;
     }
 
@@ -82,6 +96,11 @@ public class PagamentoServiceImpl implements PagamentoService {
     @Override
     public void atualizarStatusPedido(PedidoDTO pedidoDTO) {
         integradorPedido.atualizarStatusPedido(pedidoDTO);
+    }
+
+    @Override
+    public void enviarPedidoProducao(MockMessage mockMessage) {
+        integradorProducao.enviarPedidoProducao(mockMessage);
     }
 
 }
