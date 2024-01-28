@@ -4,10 +4,10 @@ metadata:
   name: fiapfood-pagamento-service
 spec:
   selector:
-    app: fiapfood-api
+    app: fiapfood-pagamento-api
   ports:
   - protocol: TCP
     port: 8080
     targetPort: 8080
-    nodePort: 30001
+    #nodePort: 30001
   type: LoadBalancer
