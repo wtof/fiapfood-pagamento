@@ -36,7 +36,7 @@ class PagamentoUseCaseImplTest {
         when(pagamentoRepository.buscarPagamentoPorIdPedido(anyLong())).thenReturn(null);
         when(pagamentoRepository.salvarPagamento(any(Pagamento.class))).thenReturn(pagamento);
 
-        assertDoesNotThrow(() -> pagamentoUseCase.salvarPagamento(pagamento));
+        assertDoesNotThrow(() -> pagamentoUseCase.confirmarPagamento(pagamento.getIdPedido()));
     }
 
     @Test
@@ -44,7 +44,7 @@ class PagamentoUseCaseImplTest {
         Pagamento pagamento = new Pagamento();
         when(pagamentoRepository.buscarPagamentoPorIdPedido(anyLong())).thenReturn(pagamento);
 
-        assertThrows(DominioException.class, () -> pagamentoUseCase.salvarPagamento(pagamento));
+        assertThrows(DominioException.class, () -> pagamentoUseCase.confirmarPagamento(pagamento.getIdPedido()));
     }
 
     @Test
